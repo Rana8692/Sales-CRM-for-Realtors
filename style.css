@@ -1,0 +1,312 @@
+/* General Body Styles */
+body {
+    font-family: 'Inter', sans-serif; /* Default font, ensure 'Inter' is loaded or provide fallbacks */
+    background-color: #f0f2f5; /* Light gray background for the page */
+    color: #333; /* Default text color */
+    line-height: 1.6; /* Improve readability */
+}
+
+/* Page Container Styles */
+.page {
+    display: none; /* Pages are hidden by default */
+    background-color: #ffffff; /* White background for page content areas */
+    padding: 24px; /* Consistent padding within pages */
+    border-radius: 8px; /* Rounded corners for pages */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+    margin-bottom: 20px; /* Space below each page */
+}
+
+.page.active {
+    display: block; /* Active page is shown */
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Modals are hidden by default */
+    position: fixed; /* Stay in place even when scrolling */
+    z-index: 1000; /* Appear above other content */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if content is too long */
+    background-color: rgba(0, 0, 0, 0.6); /* Dimmed background overlay */
+}
+
+.modal.active {
+    display: flex; /* Use flexbox to center modal content */
+    align-items: center; /* Vertically center */
+    justify-content: center; /* Horizontally center */
+}
+
+.modal-content {
+    background-color: #fff; /* White background for modal */
+    margin: auto; /* Center in flex container (though justify/align should handle it) */
+    padding: 25px 30px; /* More padding for modal content */
+    border-radius: 10px; /* Slightly more rounded corners for modals */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* More prominent shadow for modals */
+    width: 90%; /* Responsive width */
+    max-width: 600px; /* Max width for modals to maintain readability */
+    animation: fadeInModal 0.3s ease-out; /* Simple fade-in animation */
+}
+
+/* Modal Fade-in Animation */
+@keyframes fadeInModal {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Table Styles */
+.table-responsive {
+    overflow-x: auto; /* Allow horizontal scrolling on small screens */
+    border: 1px solid #e2e8f0; /* Light border around the table container */
+    border-radius: 8px; /* Rounded corners for the table container */
+}
+
+table {
+    min-width: 100%; /* Ensure table takes full width of its container */
+    border-collapse: collapse; /* Clean look for borders */
+}
+
+th, td {
+    padding: 12px 15px; /* Comfortable padding in cells */
+    text-align: left; /* Align text to the left */
+    border-bottom: 1px solid #e2e8f0; /* Separator lines for rows */
+    white-space: nowrap; /* Prevent text wrapping in cells by default, can be overridden */
+}
+
+th {
+    background-color: #f8fafc; /* Very light gray for table headers */
+    font-weight: 600; /* Make header text bolder */
+    text-transform: uppercase; /* Uppercase header text */
+    font-size: 0.75rem; /* Smaller font size for headers */
+    color: #64748b; /* Muted color for header text */
+    letter-spacing: 0.05em; /* Slight letter spacing for headers */
+}
+
+tbody tr:hover {
+    background-color: #f9fafb; /* Subtle hover effect for table rows */
+}
+
+/* Button Styles */
+.btn { /* Base button class, if you want to create one */
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; /* Remove underline from button-like links */
+}
+.btn:hover {
+    transform: translateY(-1px); /* Slight lift on hover */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.btn:active {
+    transform: translateY(0px); /* Push down on click */
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background-color: #3b82f6; /* Tailwind Blue-500 */
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #2563eb; /* Tailwind Blue-600 */
+}
+
+.btn-secondary {
+    background-color: #6b7280; /* Tailwind Gray-500 */
+    color: white;
+}
+.btn-secondary:hover {
+    background-color: #4b5563; /* Tailwind Gray-600 */
+}
+
+.btn-danger {
+    background-color: #ef4444; /* Tailwind Red-500 */
+    color: white;
+}
+.btn-danger:hover {
+    background-color: #dc2626; /* Tailwind Red-600 */
+}
+
+.btn-success {
+    background-color: #22c55e; /* Tailwind Green-500 */
+    color: white;
+}
+.btn-success:hover {
+    background-color: #16a34a; /* Tailwind Green-600 */
+}
+
+/* Navigation Button Styles */
+.nav-button {
+    padding: 0.5rem 1rem; /* py-2 px-4 */
+    border-radius: 0.375rem; /* rounded-md */
+    color: #4b5563; /* text-gray-700 */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 500;
+}
+.nav-button:hover {
+    background-color: #e0f2fe; /* lighter blue-100 equivalent */
+    color: #0c4a6e; /* darker blue for text */
+}
+.nav-button.active {
+    background-color: #3b82f6; /* Tailwind Blue-500 */
+    color: white;
+    font-weight: 600;
+}
+.nav-button i {
+    margin-right: 0.35rem; /* space between icon and text */
+}
+
+
+/* Custom Scrollbar for Webkit Browsers */
+::-webkit-scrollbar {
+    width: 8px;  /* Width of the vertical scrollbar */
+    height: 8px; /* Height of the horizontal scrollbar */
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Background of the scrollbar track */
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #a8a8a8; /* Color of the scrollbar thumb */
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #787878; /* Color of the scrollbar thumb on hover */
+}
+
+/* Input Field Styles */
+.input-field, select.input-field, textarea.input-field {
+    border: 1px solid #d1d5db; /* Tailwind Gray-300 */
+    border-radius: 0.375rem; /* rounded-md */
+    padding: 0.5rem 0.75rem; /* py-2 px-3 */
+    font-size: 0.875rem; /* sm:text-sm */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    width: 100%; /* Make inputs take full width of their container */
+}
+.input-field:focus, select.input-field:focus, textarea.input-field:focus {
+    border-color: #3b82f6; /* Tailwind Blue-500 */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25); /* Blue focus ring */
+    outline: none; /* Remove default browser outline */
+}
+
+/* Tab Button Styles for Inventory */
+.tab-button {
+    padding: 1rem 0.25rem; /* py-4 px-1 */
+    border-bottom-width: 2px;
+    border-color: transparent;
+    font-weight: 500; /* font-medium */
+    font-size: 0.875rem; /* text-sm */
+    color: #6b7280; /* Default tab text color (gray-500) */
+    transition: border-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+}
+.tab-button:hover {
+    border-bottom-color: #9ca3af; /* Lighter gray for hover (gray-400) */
+    color: #374151; /* Darker gray for text on hover (gray-700) */
+}
+.tab-button.active {
+    border-bottom-color: #3b82f6; /* Tailwind Blue-500 */
+    color: #3b82f6; /* Tailwind Blue-500 for active tab text */
+}
+
+/* Header Styles */
+header {
+    position: sticky; /* Make header sticky */
+    top: 0;
+    z-index: 50; /* Ensure header is above other content */
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08); /* Softer shadow for header */
+}
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem; /* py-4 px-6 equivalent */
+}
+header h1 {
+    font-size: 1.75rem; /* text-2xl */
+    font-weight: 700; /* font-bold */
+    color: #2563eb; /* text-blue-600 */
+}
+
+/* Main Content Area Styling */
+main.container {
+    padding: 1.5rem; /* p-6 for main content */
+    margin-top: 1rem; /* mt-4 */
+}
+
+/* Dashboard Specific Styles */
+#dashboard-page .grid > div { /* Targeting the stat boxes */
+    padding: 1.5rem; /* p-6 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* shadow */
+}
+#dashboard-page h3 {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600; /* font-semibold */
+}
+#dashboard-page p[id^="dashboard-"] { /* Targeting the stat numbers */
+    font-size: 2.25rem; /* text-3xl */
+    font-weight: 700; /* font-bold */
+    margin-top: 0.25rem; /* mt-1 */
+}
+
+/* Helper for hidden elements (can be used by JS) */
+.hidden {
+    display: none !important;
+}
+
+/* Styling for icons within buttons or text */
+i.fas, i.far, i.fal, i.fad, i.fab {
+    margin-right: 0.5em; /* Space after icon */
+    color: inherit; /* Inherit color from parent, can be overridden */
+}
+
+/* Max width for certain text elements to prevent overflow and allow truncation */
+.max-w-xs { max-width: 20rem; } /* Tailwind's max-w-xs */
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Status Badge Styles */
+.status-badge { /* A generic status badge if you want to standardize */
+    padding: 0.25em 0.6em;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px; /* pill shape */
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+/* Example usage (you'd apply these classes in JS based on status)
+.status-new { background-color: #DBEAFE; color: #1E40AF; }
+.status-junk { background-color: #FEE2E2; color: #991B1B; }
+.status-converted { background-color: #DCFCE7; color: #166534; }
+*/
+
+/* Ensure form elements inside modals are well-spaced */
+.modal-content form > div:not(:last-child),
+.modal-content form > label:not(:last-child),
+.modal-content form > input:not(:last-child),
+.modal-content form > select:not(:last-child),
+.modal-content form > textarea:not(:last-child) {
+    margin-bottom: 1rem; /* Add bottom margin to form elements */
+}
+.modal-content form .grid > div { /* For grid items, ensure their internal elements are also spaced if needed */
+    margin-bottom: 0; /* Reset if already handled by parent */
+}
+.modal-content form .mt-4 { margin-top: 1rem; }
+.modal-content form .mt-6 { margin-top: 1.5rem; }
+.modal-content form .flex.justify-end { margin-top: 1.5rem; }
+

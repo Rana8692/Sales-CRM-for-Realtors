@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Workflow System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-600">Real Estate CRM</h1>
+            <nav id="main-nav" class="space-x-2">
+                <button data-target="dashboard-page" class="nav-button px-4 py-2 rounded-md text-gray-700 hover:bg-blue-100 active">
+                    <i class="fas fa-tachometer-alt mr-1"></i> Dashboard
+                </button>
+                <button data-target="leads-page" class="nav-button px-4 py-2 rounded-md text-gray-700 hover:bg-blue-100">
+                    <i class="fas fa-users mr-1"></i> Leads
+                </button>
+                <button data-target="inquiries-page" class="nav-button px-4 py-2 rounded-md text-gray-700 hover:bg-blue-100">
+                    <i class="fas fa-file-alt mr-1"></i> Inquiries
+                </button>
+                <button data-target="inventory-page" class="nav-button px-4 py-2 rounded-md text-gray-700 hover:bg-blue-100">
+                    <i class="fas fa-warehouse mr-1"></i> Inventory
+                </button>
+                <button data-target="site-visits-page" class="nav-button px-4 py-2 rounded-md text-gray-700 hover:bg-blue-100">
+                    <i class="fas fa-map-marked-alt mr-1"></i> Site Visits
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 mt-4">
+        <div id="dashboard-page" class="page active bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-800">Dashboard</h2>
+            <p class="text-gray-600">Welcome to the Real Estate Workflow Management System. Select a module from the navigation to get started.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+                <div class="bg-blue-50 p-4 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold text-blue-700">Total Leads</h3>
+                    <p id="dashboard-total-leads" class="text-3xl font-bold text-blue-600">0</p>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold text-green-700">Active Inquiries</h3>
+                    <p id="dashboard-active-inquiries" class="text-3xl font-bold text-green-600">0</p>
+                </div>
+                <div class="bg-indigo-50 p-4 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold text-indigo-700">Properties Available</h3>
+                    <p id="dashboard-properties-available" class="text-3xl font-bold text-indigo-600">0</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="leads-page" class="page bg-white p-6 rounded-lg shadow">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-semibold text-gray-800">Lead Management</h2>
+                <button id="add-lead-btn" class="btn-primary px-4 py-2 rounded-md font-medium flex items-center">
+                    <i class="fas fa-plus mr-2"></i> Add New Lead
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Source</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client Name</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Requirements</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leads-table-body" class="bg-white divide-y divide-gray-200">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="inquiries-page" class="page bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-800">Inquiry Management</h2>
+            <div class="table-responsive">
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Inquiry ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client Name</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sales Exec.</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Proposal</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Site Visit</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inquiries-table-body" class="bg-white divide-y divide-gray-200">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="inventory-page" class="page bg-white p-6 rounded-lg shadow">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-semibold text-gray-800">Inventory Management</h2>
+                <button id="add-property-btn" class="btn-primary px-4 py-2 rounded-md font-medium flex items-center">
+                    <i class="fas fa-plus mr-2"></i> Add New Property
+                </button>
+            </div>
+            <div class="mb-4 border-b border-gray-200">
+                <nav id="inventory-tabs" class="-mb-px flex space-x-8" aria-label="Tabs">
+                    <button data-category="commercial" class="tab-button active whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Commercial</button>
+                    <button data-category="residential" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Residential</button>
+                    <button data-category="warehouse" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Warehouse</button>
+                    <button data-category="land" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Land</button>
+                    <button data-category="roi" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">ROI</button>
+                </nav>
+            </div>
+            <div class="table-responsive">
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prop. ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type/Details</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PPT Link</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">PPT Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Availability</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventory-table-body" class="bg-white divide-y divide-gray-200">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="site-visits-page" class="page bg-white p-6 rounded-lg shadow">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-800">Site Visit Management</h2>
+             <p class="text-gray-600 mb-4">Site visits are scheduled and managed via the Inquiry module.</p>
+            <div class="table-responsive">
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Visit ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Inquiry ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sales Exec.</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Scheduled Date</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="site-visits-table-body" class="bg-white divide-y divide-gray-200">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div id="modal-container" class="modal">
+        <div id="add-lead-modal" class="modal-content hidden">
+            <form id="add-lead-form">
+                <h3 class="text-xl font-semibold mb-4 text-gray-700">Add New Lead</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="lead-source" class="block text-sm font-medium text-gray-700 mb-1">Lead Source</label>
+                        <select id="lead-source" name="source" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm focus:outline-none sm:text-sm" required>
+                            <option value="Facebook">Facebook</option>
+                            <option value="Instagram">Instagram</option>
+                            <option value="Sales Team">Sales Team</option>
+                            <option value="Website">Website</option>
+                            <option value="Referral">Referral</option>
+                            <option value="Walk-in">Walk-in</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="lead-client-name" class="block text-sm font-medium text-gray-700 mb-1">Client Name</label>
+                        <input type="text" id="lead-client-name" name="clientName" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm focus:outline-none sm:text-sm" required>
+                    </div>
+                    <div>
+                        <label for="lead-client-email" class="block text-sm font-medium text-gray-700 mb-1">Client Email</label>
+                        <input type="email" id="lead-client-email" name="email" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm focus:outline-none sm:text-sm" required>
+                    </div>
+                    <div>
+                        <label for="lead-client-phone" class="block text-sm font-medium text-gray-700 mb-1">Client Phone</label>
+                        <input type="tel" id="lead-client-phone" name="phone" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm focus:outline-none sm:text-sm" required>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label for="lead-requirements" class="block text-sm font-medium text-gray-700 mb-1">Requirements</label>
+                    <textarea id="lead-requirements" name="requirements" rows="3" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm focus:outline-none sm:text-sm" required></textarea>
+                </div>
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button type="button" class="btn-secondary px-4 py-2 rounded-md font-medium" onclick="closeModal('add-lead-modal')">Cancel</button>
+                    <button type="submit" class="btn-primary px-4 py-2 rounded-md font-medium">Save Lead</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="validate-lead-modal" class="modal-content hidden">
+            <form id="validate-lead-form">
+                <h3 class="text-xl font-semibold mb-4 text-gray-700">Validate Lead</h3>
+                <input type="hidden" id="validate-lead-id">
+                <p class="mb-2 text-gray-600">Lead: <span id="validate-lead-name" class="font-semibold"></span></p>
+                <p class="mb-4 text-gray-600">Requirements: <span id="validate-lead-requirements" class="font-semibold"></span></p>
+                <div>
+                    <label for="lead-validation-action" class="block text-sm font-medium text-gray-700 mb-1">Action</label>
+                    <select id="lead-validation-action" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm focus:outline-none sm:text-sm">
+                        <option value="to_inquiry">Convert to Inquiry</option>
+                        <option value="to_inventory">Convert to Inventory (Client is Selling)</option>
+                        <option value="junk">Mark as Junk Lead</option>
+                    </select>
+                </div>
+                <div id="assign-sales-exec-div" class="mt-4 hidden">
+                     <label for="assign-sales-executive" class="block text-sm font-medium text-gray-700 mb-1">Assign Sales Executive</label>
+                     <select id="assign-sales-executive" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm focus:outline-none sm:text-sm">
+                        <option value="Alice Smith">Alice Smith</option>
+                        <option value="Bob Johnson">Bob Johnson</option>
+                        <option value="Carol White">Carol White</option>
+                     </select>
+                </div>
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button type="button" class="btn-secondary px-4 py-2 rounded-md font-medium" onclick="closeModal('validate-lead-modal')">Cancel</button>
+                    <button type="submit" class="btn-success px-4 py-2 rounded-md font-medium">Process</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="add-property-modal" class="modal-content hidden">
+            <form id="add-property-form">
+                <h3 class="text-xl font-semibold mb-4 text-gray-700">Add New Property</h3>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="property-category" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                        <select id="property-category" name="category" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm focus:outline-none sm:text-sm" required>
+                            <option value="commercial">Commercial</option>
+                            <option value="residential">Residential</option>
+                            <option value="warehouse">Warehouse</option>
+                            <option value="land">Land</option>
+                            <option value="roi">ROI</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="property-type-details" class="block text-sm font-medium text-gray-700 mb-1">Type/Details (e.g., 3BHK Apartment, Office Space)</label>
+                        <input type="text" id="property-type-details" name="typeDetails" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm focus:outline-none sm:text-sm" required>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label for="property-address" class="block text-sm font-medium text-gray-700 mb-1">Address / Location</label>
+                    <textarea id="property-address" name="address" rows="2" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm focus:outline-none sm:text-sm" required></textarea>
+                </div>
+                <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                     <div>
+                        <label for="property-seller-name" class="block text-sm font-medium text-gray-700 mb-1">Seller Name (if applicable)</label>
+                        <input type="text" id="property-seller-name" name="sellerName" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm focus:outline-none sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="property-seller-contact" class="block text-sm font-medium text-gray-700 mb-1">Seller Contact (if applicable)</label>
+                        <input type="text" id="property-seller-contact" name="sellerContact" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm focus:outline-none sm:text-sm">
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button type="button" class="btn-secondary px-4 py-2 rounded-md font-medium" onclick="closeModal('add-property-modal')">Cancel</button>
+                    <button type="submit" class="btn-primary px-4 py-2 rounded-md font-medium">Add Property</button>
+                </div>
+            </form>
+        </div>
+        
+        <div id="update-inquiry-modal" class="modal-content hidden">
+            <form id="update-inquiry-form">
+                <h3 class="text-xl font-semibold mb-4 text-gray-700">Update Inquiry</h3>
+                <input type="hidden" id="update-inquiry-id">
+                <p class="mb-4">Updating Inquiry for: <span id="update-inquiry-client-name" class="font-semibold"></span></p>
+
+                <div class="mb-4 p-3 border rounded-md">
+                    <h4 class="text-md font-semibold text-gray-700 mb-2">Client Contact (Sales Executive)</h4>
+                    <label for="inquiry-contact-status" class="block text-sm font-medium text-gray-700 mb-1">Contact Status</label>
+                    <select id="inquiry-contact-status" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm">
+                        <option value="Pending">Pending</option>
+                        <option value="Contacted">Contacted</option>
+                        <option value="Not Contacted">Not Contacted</option>
+                        <option value="Not Interested">Not Interested (Initial)</option>
+                        <option value="Interested">Interested (Initial)</option>
+                    </select>
+                    <label for="inquiry-call-recording" class="block text-sm font-medium text-gray-700 mt-2 mb-1">Call Recording (Link/Notes)</label>
+                    <input type="text" id="inquiry-call-recording" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm">
+                </div>
+
+                <div class="mb-4 p-3 border rounded-md">
+                    <h4 class="text-md font-semibold text-gray-700 mb-2">Proposal (Sales Executive)</h4>
+                    <label for="inquiry-proposal-date" class="block text-sm font-medium text-gray-700 mb-1">Proposal Date</label>
+                    <input type="date" id="inquiry-proposal-date" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm">
+                    <label for="inquiry-proposal-status" class="block text-sm font-medium text-gray-700 mt-2 mb-1">Proposal Status</label>
+                    <select id="inquiry-proposal-status" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm">
+                        <option value="Pending">Pending</option>
+                        <option value="Sent">Sent</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+                
+                <div class="mb-4 p-3 border rounded-md">
+                    <h4 class="text-md font-semibold text-gray-700 mb-2">Engagement Status (Sales Executive)</h4>
+                    <label for="inquiry-engagement-status" class="block text-sm font-medium text-gray-700 mb-1">Engagement Status</label>
+                    <select id="inquiry-engagement-status" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm">
+                        <option value="Pending">Pending</option>
+                        <option value="Interested">Interested</option>
+                        <option value="Not Interested">Not Interested</option>
+                        <option value="New Proposal Needed">New Proposal Needed</option>
+                        <option value="Negotiation">Negotiation</option>
+                        <option value="Lost Lead">Lost Lead</option>
+                        <option value="Sold">Sold</option>
+                        <option value="Rented">Rented</option>
+                    </select>
+                </div>
+
+
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button type="button" class="btn-secondary px-4 py-2 rounded-md font-medium" onclick="closeModal('update-inquiry-modal')">Cancel</button>
+                    <button type="submit" class="btn-primary px-4 py-2 rounded-md font-medium">Save Changes</button>
+                </div>
+            </form>
+        </div>
+        
+        <div id="manage-inventory-modal" class="modal-content hidden">
+            <form id="manage-inventory-form">
+                <h3 class="text-xl font-semibold mb-4 text-gray-700">Manage Inventory Item</h3>
+                <input type="hidden" id="manage-inventory-id">
+                <input type="hidden" id="manage-inventory-category">
+                <p class="mb-4">Property: <span id="manage-inventory-details" class="font-semibold"></span></p>
+
+                <div class="mb-4">
+                    <label for="inventory-ppt-link" class="block text-sm font-medium text-gray-700 mb-1">PPT Link</label>
+                    <input type="url" id="inventory-ppt-link" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm" placeholder="https://example.com/ppt">
+                </div>
+                <div class="mb-4">
+                    <label for="inventory-ppt-status" class="block text-sm font-medium text-gray-700 mb-1">PPT Status</label>
+                    <select id="inventory-ppt-status" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm">
+                        <option value="Pending">Pending</option>
+                        <option value="Prepared">Prepared</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="inventory-availability-status" class="block text-sm font-medium text-gray-700 mb-1">Availability Status</label>
+                    <select id="inventory-availability-status" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm">
+                        <option value="Available">Available</option>
+                        <option value="Not Available">Not Available</option>
+                        <option value="Sold">Sold</option>
+                        <option value="Rented">Rented</option>
+                    </select>
+                </div>
+                 <div class="mt-6 flex justify-end space-x-3">
+                    <button type="button" class="btn-secondary px-4 py-2 rounded-md font-medium" onclick="closeModal('manage-inventory-modal')">Cancel</button>
+                    <button type="submit" class="btn-primary px-4 py-2 rounded-md font-medium">Update Inventory</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="schedule-site-visit-modal" class="modal-content hidden">
+            <form id="schedule-site-visit-form">
+                <h3 class="text-xl font-semibold mb-4 text-gray-700">Schedule Site Visit</h3>
+                <input type="hidden" id="site-visit-inquiry-id">
+                <p class="mb-2">For Inquiry: <span id="site-visit-inquiry-client" class="font-semibold"></span></p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="site-visit-date" class="block text-sm font-medium text-gray-700 mb-1">Date</label>
+                        <input type="date" id="site-visit-date" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm" required>
+                    </div>
+                    <div>
+                        <label for="site-visit-time" class="block text-sm font-medium text-gray-700 mb-1">Time</label>
+                        <input type="time" id="site-visit-time" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm" required>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label for="site-visit-sales-executive" class="block text-sm font-medium text-gray-700 mb-1">Sales Executive</label>
+                     <select id="site-visit-sales-executive" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm focus:outline-none sm:text-sm">
+                        </select>
+                </div>
+                <div class="mt-4">
+                    <label for="site-visit-location-property" class="block text-sm font-medium text-gray-700 mb-1">Property/Location for Visit</label>
+                    <input type="text" id="site-visit-location-property" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm" placeholder="Enter property ID or address" required>
+                </div>
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button type="button" class="btn-secondary px-4 py-2 rounded-md font-medium" onclick="closeModal('schedule-site-visit-modal')">Cancel</button>
+                    <button type="submit" class="btn-primary px-4 py-2 rounded-md font-medium">Schedule Visit</button>
+                </div>
+            </form>
+        </div>
+        
+        <div id="update-site-visit-modal" class="modal-content hidden">
+            <form id="update-site-visit-form">
+                <h3 class="text-xl font-semibold mb-4 text-gray-700">Update Site Visit</h3>
+                <input type="hidden" id="update-site-visit-id">
+                <p class="mb-2">Visit ID: <span id="display-update-site-visit-id" class="font-semibold"></span></p>
+                <p class="mb-4">Client: <span id="display-update-site-visit-client" class="font-semibold"></span></p>
+
+                <div>
+                    <label for="update-site-visit-status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                    <select id="update-site-visit-status" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm">
+                        <option value="Scheduled">Scheduled</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="mt-4">
+                    <label for="update-site-visit-exec-location" class="block text-sm font-medium text-gray-700 mb-1">Sales Executive's Location (Captured)</label>
+                    <input type="text" id="update-site-visit-exec-location" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm" placeholder="e.g., On-site, GPS Coordinates">
+                </div>
+                <div class="mt-4">
+                    <label for="update-site-visit-remarks" class="block text-sm font-medium text-gray-700 mb-1">Site Visit Remarks/Feedback</label>
+                    <textarea id="update-site-visit-remarks" rows="3" class="input-field mt-1 block w-full py-2 px-3 border rounded-md shadow-sm sm:text-sm"></textarea>
+                </div>
+                 <div class="mt-6 flex justify-end space-x-3">
+                    <button type="button" class="btn-secondary px-4 py-2 rounded-md font-medium" onclick="closeModal('update-site-visit-modal')">Cancel</button>
+                    <button type="submit" class="btn-primary px-4 py-2 rounded-md font-medium">Update Visit</button>
+                </div>
+            </form>
+        </div>
+
+    </div> <script>
+        // Simulated Data Storage
+        let leads = [
+            { id: 1, source: 'Website', clientName: 'Aarav Sharma', email: 'aarav.sharma@example.com', phone: '9876543210', requirements: '3BHK Apartment, Sea View', status: 'New' },
+            { id: 2, source: 'Referral', clientName: 'Priya Patel', email: 'priya.patel@example.com', phone: '8765432109', requirements: 'Commercial Office Space, 1000 sqft', status: 'New' }
+        ];
+        let inquiries = [];
+        let inventory = {
+            commercial: [
+                { id: 'C1', category: 'commercial', typeDetails: 'Office Space, Grade A', address: 'Tech Park, Block A, Bangalore', pptLink: '', pptStatus: 'Pending', availability: 'Available', sellerName: 'Dev Corp', sellerContact: '9988776655' }
+            ],
+            residential: [
+                 { id: 'R1', category: 'residential', typeDetails: '3BHK Luxury Apartment', address: 'Palm Heights, Mumbai', pptLink: 'https://example.com/ppt/R1', pptStatus: 'Prepared', availability: 'Available', sellerName: 'Ms. Anika Reddy', sellerContact: '9123456780' }
+            ],
+            warehouse: [],
+            land: [],
+            roi: []
+        };
+        let siteVisits = [];
+        let followUps = []; // { id, inquiryId, date, salesExecutive, status ('Done', 'Pending', 'Not Interested'), notes, callRecording }
+
+        // ID Counters
+        let nextLeadId = leads.length > 0 ? Math.max(...leads.map(l => l.id)) + 1 : 1;
+        let nextInquiryId = 1;
+        let nextSiteVisitId = 1;
+        let nextFollowUpId = 1;
+        let nextPropertyId = {
+            commercial: inventory.commercial.length > 0 ? parseInt(inventory.commercial[inventory.commercial.length-1].id.substring(1)) + 1 : 1,
+            residential: inventory.residential.length > 0 ? parseInt(inventory.residential[inventory.residential.length-1].id.substring(1)) + 1 : 1,
+            warehouse: 1,
+            land: 1,
+            roi: 1
+        };
+        
+        const salesExecutives = ["Alice Smith", "Bob Johnson", "Carol White", "David Lee"];
+
+
+        // DOMContentLoaded to ensure script runs after HTML is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial Page Load
+            navigateTo('dashboard-page');
+            renderLeadsTable();
+            renderInquiriesTable();
+            renderInventoryTable(); // Default to commercial
+            renderSiteVisitsTable();
+            updateDashboardStats();
+
+            // Navigation Handling
+            const navButtons = document.querySelectorAll('#main-nav button');
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    navigateTo(button.dataset.target);
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                });
+            });
+
+            // Inventory Tab Handling
+            const inventoryTabs = document.querySelectorAll('#inventory-tabs button');
+            inventoryTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    inventoryTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    renderInventoryTable(tab.dataset.category);
+                });
+            });
+
+            // Modal Triggers
+            document.getElementById('add-lead-btn').addEventListener('click', () => openModal('add-lead-modal'));
+            document.getElementById('add-property-btn').addEventListener('click', () => openModal('add-property-modal'));
+
+            // Form Submissions
+            document.getElementById('add-lead-form').addEventListener('submit', handleAddLead);
+            document.getElementById('validate-lead-form').addEventListener('submit', handleValidateLead);
+            document.getElementById('add-property-form').addEventListener('submit', handleAddProperty);
+            document.getElementById('update-inquiry-form').addEventListener('submit', handleUpdateInquiry);
+            document.getElementById('manage-inventory-form').addEventListener('submit', handleManageInventoryItem);
+            document.getElementById('schedule-site-visit-form').addEventListener('submit', handleScheduleSiteVisit);
+            document.getElementById('update-site-visit-form').addEventListener('submit', handleUpdateSiteVisit);
+
+
+            // Dynamic select population for Sales Executives in Validate Lead Modal
+            const assignSalesExecSelect = document.getElementById('assign-sales-executive');
+            salesExecutives.forEach(exec => {
+                const option = document.createElement('option');
+                option.value = exec;
+                option.textContent = exec;
+                assignSalesExecSelect.appendChild(option);
+            });
+            
+            // Show/hide Sales Executive dropdown based on validation action
+            document.getElementById('lead-validation-action').addEventListener('change', function() {
+                const assignDiv = document.getElementById('assign-sales-exec-div');
+                if (this.value === 'to_inquiry') {
+                    assignDiv.classList.remove('hidden');
+                } else {
+                    assignDiv.classList.add('hidden');
+                }
+            });
+        });
+
+        // Navigation Function
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById('modal-container').classList.add('active');
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            // If all specific modals are hidden, hide the container
+            const anyModalActive = Array.from(document.querySelectorAll('.modal-content')).some(m => !m.classList.contains('hidden'));
+            if (!anyModalActive) {
+                 document.getElementById('modal-container').classList.remove('active');
+            }
+        }
+        // Close modal if backdrop is clicked
+        document.getElementById('modal-container').addEventListener('click', function(event) {
+            if (event.target === this) { // Check if the click is on the backdrop itself
+                // Hide all modal content divs
+                document.querySelectorAll('.modal-content').forEach(modalContent => {
+                    modalContent.classList.add('hidden');
+                });
+                // Hide the modal container
+                this.classList.remove('active');
+            }
+        });
+
+
+        // --- Lead Management Functions ---
+        function renderLeadsTable() {
+            const tbody = document.getElementById('leads-table-body');
+            tbody.innerHTML = ''; // Clear existing rows
+            leads.forEach(lead => {
+                const row = tbody.insertRow();
+                row.innerHTML = \`
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">\${lead.id}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">\${lead.source}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">\${lead.clientName}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <i class="fas fa-envelope mr-1 text-gray-400"></i> \${lead.email}<br>
+                        <i class="fas fa-phone mr-1 text-gray-400"></i> \${lead.phone}
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-500 max-w-xs truncate" title="\${lead.requirements}">\${lead.requirements}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full \${
+                            lead.status === 'New' ? 'bg-blue-100 text-blue-800' :
+                            lead.status === 'Junk' ? 'bg-red-100 text-red-800' :
+                            lead.status === 'Converted to Inquiry' || lead.status === 'Converted to Inventory Listing' ? 'bg-green-100 text-green-800' : // Updated this line
+                            'bg-gray-100 text-gray-800'
+                        }">\${lead.status}</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        \${lead.status === 'New' ? \`<button class="text-indigo-600 hover:text-indigo-900" onclick="openValidateLeadModal(\${lead.id})"><i class="fas fa-check-circle mr-1"></i> Validate</button>\` : ''}
+                        </td>
+                \`;
+            });
+            updateDashboardStats();
+        }
+
+        function handleAddLead(event) {
+            event.preventDefault();
+            const form = event.target;
+            const newLead = {
+                id: nextLeadId++,
+                source: form.source.value,
+                clientName: form.clientName.value,
+                email: form.email.value,
+                phone: form.phone.value,
+                requirements: form.requirements.value,
+                status: 'New' // Initial status
+            };
+            leads.push(newLead);
+            renderLeadsTable();
+            form.reset();
+            closeModal('add-lead-modal');
+        }
+
+        function openValidateLeadModal(leadId) {
+            const lead = leads.find(l => l.id === leadId);
+            if (lead) {
+                document.getElementById('validate-lead-id').value = lead.id;
+                document.getElementById('validate-lead-name').textContent = lead.clientName;
+                document.getElementById('validate-lead-requirements').textContent = lead.requirements;
+                document.getElementById('lead-validation-action').value = 'to_inquiry'; // Default action
+                document.getElementById('assign-sales-exec-div').classList.remove('hidden'); // Show by default for 'to_inquiry'
+                openModal('validate-lead-modal');
+            }
+        }
+
+        function handleValidateLead(event) {
+            event.preventDefault();
+            const leadId = parseInt(document.getElementById('validate-lead-id').value);
+            const action = document.getElementById('lead-validation-action').value;
+            const salesExecutive = document.getElementById('assign-sales-executive').value;
+
+            const lead = leads.find(l => l.id === leadId);
+            if (!lead) return;
+
+            if (action === 'to_inquiry') {
+                // Convert to Inquiry
+                const newInquiry = {
+                    id: nextInquiryId++,
+                    leadId: lead.id,
+                    clientName: lead.clientName,
+                    clientEmail: lead.email,
+                    clientPhone: lead.phone,
+                    requirements: lead.requirements,
+                    salesExecutive: salesExecutive,
+                    status: 'New', // Inquiry status
+                    contactStatus: 'Pending',
+                    proposalDate: null,
+                    proposalStatus: 'Pending',
+                    siteVisitScheduled: null, // or an ID to site visit table
+                    engagementStatus: 'Pending',
+                    negotiationDate: null,
+                    negotiationStatus: 'Pending',
+                    closureDate: null,
+                    closureStatus: 'Pending',
+                    followUps: [], // Array to store follow-up IDs or objects
+                    shortlistedProperties: [] // Array of property IDs
+                };
+                inquiries.push(newInquiry);
+                lead.status = 'Converted to Inquiry'; // Corrected status
+                renderInquiriesTable();
+            } else if (action === 'to_inventory') {
+                // Convert to Inventory (client is selling)
+                lead.status = 'Converted to Inventory Listing'; // Corrected status
+                alert(\`Lead "\${lead.clientName}" marked for Inventory Listing. Please add property details in the Inventory section.\`);
+
+            } else if (action === 'junk') {
+                lead.status = 'Junk Lead';
+            }
+
+            renderLeadsTable();
+            closeModal('validate-lead-modal');
+        }
+
+        // --- Inquiry Management Functions ---
+        function renderInquiriesTable() {
+            const tbody = document.getElementById('inquiries-table-body');
+            tbody.innerHTML = '';
+            inquiries.forEach(inquiry => {
+                const row = tbody.insertRow();
+                row.innerHTML = \`
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">INQ-\${inquiry.id}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">\${inquiry.clientName}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">\${inquiry.salesExecutive}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full \${
+                            inquiry.status === 'New' ? 'bg-blue-100 text-blue-800' :
+                            inquiry.status === 'Lost Lead' ? 'bg-red-100 text-red-800' :
+                            inquiry.status === 'Sold' || inquiry.status === 'Rented' ? 'bg-green-100 text-green-800' :
+                            inquiry.status === 'Negotiation' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800'
+                         }">\${inquiry.status}</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">\${inquiry.contactStatus}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">\${inquiry.proposalStatus} \${inquiry.proposalDate ? '('+inquiry.proposalDate+')' : ''}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">\${inquiry.siteVisitScheduled ? \`SV-\${inquiry.siteVisitScheduled}\` : 'Not Scheduled'}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                        <button class="text-blue-600 hover:text-blue-900" onclick="openUpdateInquiryModal(\${inquiry.id})"><i class="fas fa-edit mr-1"></i> Update</button>
+                        <button class="text-green-600 hover:text-green-900" onclick="openScheduleSiteVisitModal(\${inquiry.id})"><i class="fas fa-calendar-alt mr-1"></i> Site Visit</button>
+                        </td>
+                \`;
+            });
+            updateDashboardStats();
+        }
+
+        function openUpdateInquiryModal(inquiryId) {
+            const inquiry = inquiries.find(i => i.id === inquiryId);
+            if (inquiry) {
+                document.getElementById('update-inquiry-id').value = inquiry.id;
+                document.getElementById('update-inquiry-client-name').textContent = inquiry.clientName;
+                document.getElementById('inquiry-contact-status').value = inquiry.contactStatus;
+                document.getElementById('inquiry-call-recording').value = inquiry.callRecording || '';
+                document.getElementById('inquiry-proposal-date').value = inquiry.proposalDate || '';
+                document.getElementById('inquiry-proposal-status').value = inquiry.proposalStatus;
+                document.getElementById('inquiry-engagement-status').value = inquiry.engagementStatus;
+                openModal('update-inquiry-modal');
+            }
+        }
+
+        function handleUpdateInquiry(event) {
+            event.preventDefault();
+            const inquiryId = parseInt(document.getElementById('update-inquiry-id').value);
+            const inquiry = inquiries.find(i => i.id === inquiryId);
+
+            if (inquiry) {
+                inquiry.contactStatus = document.getElementById('inquiry-contact-status').value;
+                inquiry.callRecording = document.getElementById('inquiry-call-recording').value;
+                inquiry.proposalDate = document.getElementById('inquiry-proposal-date').value;
+                inquiry.proposalStatus = document.getElementById('inquiry-proposal-status').value;
+                inquiry.engagementStatus = document.getElementById('inquiry-engagement-status').value;
+                
+                if (inquiry.engagementStatus === 'Lost Lead') inquiry.status = 'Lost Lead';
+                else if (inquiry.engagementStatus === 'Sold') inquiry.status = 'Sold';
+                else if (inquiry.engagementStatus === 'Rented') inquiry.status = 'Rented';
+                else if (inquiry.engagementStatus === 'Negotiation') inquiry.status = 'Negotiation';
+                else if (inquiry.engagementStatus === 'Interested' && inquiry.status === 'New') inquiry.status = 'Active'; // Example of further status update
+
+                if (inquiry.status === 'Sold' || inquiry.status === 'Rented') {
+                    alert(\`Inquiry INQ-\${inquiry.id} marked as \${inquiry.status}. Remember to update the property status in Inventory.\`);
+                }
+
+                renderInquiriesTable();
+                closeModal('update-inquiry-modal');
+            }
+        }
+
+
+        // --- Inventory Management Functions ---
+        let currentInventoryCategory = 'commercial'; // Default category
+
+        function renderInventoryTable(category = currentInventoryCategory) {
+            currentInventoryCategory = category; // Ensure current category is updated
+            const tbody = document.getElementById('inventory-table-body');
+            tbody.innerHTML = '';
+            const categoryInventory = inventory[category] || [];
+
+            categoryInventory.forEach(item => {
+                const row = tbody.insertRow();
+                row.innerHTML = \`
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">\${item.id}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500">
+                        <div class="font-semibold text-gray-800">\${item.typeDetails}</div>
+                        <div class="text-xs text-gray-400">\${item.address}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">\${item.pptLink ? \`<a href="\${item.pptLink}" target="_blank" class="text-blue-500 hover:underline">View PPT</a>\` : 'No Link'}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">\${item.pptStatus}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full \${
+                            item.availability === 'Available' ? 'bg-green-100 text-green-800' :
+                            item.availability === 'Sold' || item.availability === 'Rented' ? 'bg-red-100 text-red-800' : 
+                            item.availability === 'Not Available' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800' // Added Not Available
+                        }">\${item.availability}</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <button class="text-indigo-600 hover:text-indigo-900" onclick="openManageInventoryModal('\${item.id}', '\${category}')"><i class="fas fa-cog mr-1"></i> Manage</button>
+                    </td>
+                \`;
+            });
+            updateDashboardStats();
+        }
+
+        function handleAddProperty(event) {
+            event.preventDefault();
+            const form = event.target;
+            const category = form.category.value;
+            const newProperty = {
+                id: \`\${category.charAt(0).toUpperCase()}\${nextPropertyId[category]++}\`,
+                category: category,
+                typeDetails: form.typeDetails.value,
+                address: form.address.value,
+                sellerName: form.sellerName.value,
+                sellerContact: form.sellerContact.value,
+                pptLink: '',
+                pptStatus: 'Pending',
+                availability: 'Available'
+            };
+            if (!inventory[category]) inventory[category] = []; // Ensure category array exists
+            inventory[category].push(newProperty);
+            renderInventoryTable(category); 
+            form.reset();
+            closeModal('add-property-modal');
+        }
+
+        function openManageInventoryModal(itemId, category) {
+            const item = inventory[category].find(p => p.id === itemId);
+            if (item) {
+                document.getElementById('manage-inventory-id').value = item.id;
+                document.getElementById('manage-inventory-category').value = category;
+                document.getElementById('manage-inventory-details').textContent = \`\${item.typeDetails} (ID: \${item.id})\`;
+                document.getElementById('inventory-ppt-link').value = item.pptLink || '';
+                document.getElementById('inventory-ppt-status').value = item.pptStatus;
+                document.getElementById('inventory-availability-status').value = item.availability;
+                openModal('manage-inventory-modal');
+            }
+        }
+
+        function handleManageInventoryItem(event) {
+            event.preventDefault();
+            const itemId = document.getElementById('manage-inventory-id').value;
+            const category = document.getElementById('manage-inventory-category').value;
+            const item = inventory[category].find(p => p.id === itemId);
+
+            if (item) {
+                item.pptLink = document.getElementById('inventory-ppt-link').value;
+                item.pptStatus = document.getElementById('inventory-ppt-status').value;
+                item.availability = document.getElementById('inventory-availability-status').value;
+                renderInventoryTable(category);
+                closeModal('manage-inventory-modal');
+            }
+        }
+        
+        // --- Site Visit Functions ---
+        function renderSiteVisitsTable() {
+            const tbody = document.getElementById('site-visits-table-body');
+            tbody.innerHTML = '';
+            siteVisits.forEach(visit => {
+                const inquiry = inquiries.find(i => i.id === visit.inquiryId);
+                const row = tbody.insertRow();
+                row.innerHTML = \`
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">SV-\${visit.id}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">INQ-\${visit.inquiryId}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">\${inquiry ? inquiry.clientName : 'N/A'}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">\${visit.salesExecutive}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">\${visit.dateTime}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full \${
+                            visit.status === 'Scheduled' ? 'bg-blue-100 text-blue-800' :
+                            visit.status === 'Completed' ? 'bg-green-100 text-green-800' :
+                            visit.status === 'Cancelled' ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800'
+                        }">\${visit.status}</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <button class="text-indigo-600 hover:text-indigo-900" onclick="openUpdateSiteVisitModal(\${visit.id})"><i class="fas fa-edit mr-1"></i> Update</button>
+                    </td>
+                \`;
+            });
+        }
+
+        function openScheduleSiteVisitModal(inquiryId) {
+            const inquiry = inquiries.find(i => i.id === inquiryId);
+            if (inquiry) {
+                document.getElementById('site-visit-inquiry-id').value = inquiry.id;
+                document.getElementById('site-visit-inquiry-client').textContent = \`\${inquiry.clientName} (INQ-\${inquiry.id})\`;
+                
+                const salesExecSelect = document.getElementById('site-visit-sales-executive');
+                salesExecSelect.innerHTML = ''; 
+                const defaultOption = document.createElement('option');
+                defaultOption.value = inquiry.salesExecutive;
+                defaultOption.textContent = inquiry.salesExecutive;
+                defaultOption.selected = true;
+                salesExecSelect.appendChild(defaultOption);
+                salesExecutives.filter(se => se !== inquiry.salesExecutive).forEach(exec => {
+                    const opt = document.createElement('option');
+                    opt.value = exec;
+                    opt.textContent = exec;
+                    salesExecSelect.appendChild(opt);
+                });
+
+                document.getElementById('site-visit-location-property').value = inquiry.requirements; 
+                openModal('schedule-site-visit-modal');
+            }
+        }
+
+        function handleScheduleSiteVisit(event) {
+            event.preventDefault();
+            const inquiryId = parseInt(document.getElementById('site-visit-inquiry-id').value);
+            const inquiry = inquiries.find(i => i.id === inquiryId);
+
+            if (inquiry) {
+                const newSiteVisit = {
+                    id: nextSiteVisitId++,
+                    inquiryId: inquiry.id,
+                    salesExecutive: document.getElementById('site-visit-sales-executive').value,
+                    dateTime: \`\${document.getElementById('site-visit-date').value} \${document.getElementById('site-visit-time').value}\`,
+                    propertyLocation: document.getElementById('site-visit-location-property').value,
+                    status: 'Scheduled', 
+                    execLocation: '',
+                    remarks: ''
+                };
+                siteVisits.push(newSiteVisit);
+                inquiry.siteVisitScheduled = newSiteVisit.id; 
+
+                renderSiteVisitsTable();
+                renderInquiriesTable(); 
+                closeModal('schedule-site-visit-modal');
+                document.getElementById('schedule-site-visit-form').reset();
+            }
+        }
+        
+        function openUpdateSiteVisitModal(visitId) {
+            const visit = siteVisits.find(sv => sv.id === visitId);
+            if (visit) {
+                const inquiry = inquiries.find(i => i.id === visit.inquiryId);
+                document.getElementById('update-site-visit-id').value = visit.id;
+                document.getElementById('display-update-site-visit-id').textContent = \`SV-\${visit.id}\`;
+                document.getElementById('display-update-site-visit-client').textContent = inquiry ? inquiry.clientName : 'N/A';
+                document.getElementById('update-site-visit-status').value = visit.status;
+                document.getElementById('update-site-visit-exec-location').value = visit.execLocation || '';
+                document.getElementById('update-site-visit-remarks').value = visit.remarks || '';
+                openModal('update-site-visit-modal');
+            }
+        }
+
+        function handleUpdateSiteVisit(event) {
+            event.preventDefault();
+            const visitId = parseInt(document.getElementById('update-site-visit-id').value);
+            const visit = siteVisits.find(sv => sv.id === visitId);
+
+            if (visit) {
+                visit.status = document.getElementById('update-site-visit-status').value;
+                visit.execLocation = document.getElementById('update-site-visit-exec-location').value;
+                visit.remarks = document.getElementById('update-site-visit-remarks').value;
+
+                if (visit.status === 'Completed') {
+                    const inquiry = inquiries.find(i => i.id === visit.inquiryId);
+                    if (inquiry) {
+                        const newFollowUp = {
+                            id: nextFollowUpId++,
+                            inquiryId: inquiry.id,
+                            date: new Date().toISOString().split('T')[0], 
+                            salesExecutive: inquiry.salesExecutive, 
+                            status: 'Pending', 
+                            notes: \`Auto-generated after Site Visit SV-\${visit.id} completion. Client feedback: \${visit.remarks}\`,
+                            callRecording: ''
+                        };
+                        followUps.push(newFollowUp);
+                        if (!inquiry.followUps) inquiry.followUps = []; // Ensure followUps array exists
+                        inquiry.followUps.push(newFollowUp.id); 
+                        alert(\`Follow-up created for Inquiry INQ-\${inquiry.id}.\`);
+                    }
+                }
+                renderSiteVisitsTable();
+                closeModal('update-site-visit-modal');
+            }
+        }
+
+        // --- Dashboard Update ---
+        function updateDashboardStats() {
+            document.getElementById('dashboard-total-leads').textContent = leads.length;
+            const activeInquiries = inquiries.filter(i => i.status !== 'Lost Lead' && i.status !== 'Sold' && i.status !== 'Rented').length;
+            document.getElementById('dashboard-active-inquiries').textContent = activeInquiries;
+            
+            let availableProperties = 0;
+            for (const categoryKey in inventory) { // Use categoryKey to avoid conflict with 'category' variable in other scopes
+                if (Array.isArray(inventory[categoryKey])) { // Ensure it's an array
+                    availableProperties += inventory[categoryKey].filter(p => p.availability === 'Available').length;
+                }
+            }
+            document.getElementById('dashboard-properties-available').textContent = availableProperties;
+        }
+
+    </script>
+</body>
+</html>
