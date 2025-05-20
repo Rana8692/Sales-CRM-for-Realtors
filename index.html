@@ -35,23 +35,80 @@
 
     <main class="container mx-auto p-4 mt-4">
         <div id="dashboard-page" class="page active bg-white p-6 rounded-lg shadow">
-            <h2 class="text-2xl font-semibold mb-4 text-gray-800">Dashboard</h2>
-            <p class="text-gray-600">Welcome to the Real Estate Workflow Management System. Select a module from the navigation to get started.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-                <div class="bg-blue-50 p-4 rounded-lg shadow">
-                    <h3 class="text-lg font-semibold text-blue-700">Total Leads</h3>
-                    <p id="dashboard-total-leads" class="text-3xl font-bold text-blue-600">0</p>
+            <div class="mb-6">
+                <h2 class="text-3xl font-semibold text-gray-800">Dashboard</h2>
+                <p class="text-gray-600 text-lg">Welcome back, John Doe</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-blue-50 p-5 rounded-xl shadow-lg flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-md font-semibold text-blue-700">Total Leads</h3>
+                        <p id="dashboard-total-leads" class="text-4xl font-bold text-blue-600 mt-1">0</p>
+                    </div>
+                    <p class="text-sm text-blue-500 mt-2">+12% vs last month</p>
                 </div>
-                <div class="bg-green-50 p-4 rounded-lg shadow">
-                    <h3 class="text-lg font-semibold text-green-700">Active Inquiries</h3>
-                    <p id="dashboard-active-inquiries" class="text-3xl font-bold text-green-600">0</p>
+                <div class="bg-green-50 p-5 rounded-xl shadow-lg flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-md font-semibold text-green-700">Active Inquiries</h3>
+                        <p id="dashboard-active-inquiries" class="text-4xl font-bold text-green-600 mt-1">0</p>
+                    </div>
+                    <p class="text-sm text-green-500 mt-2">+8% vs last month</p>
                 </div>
-                <div class="bg-indigo-50 p-4 rounded-lg shadow">
-                    <h3 class="text-lg font-semibold text-indigo-700">Properties Available</h3>
-                    <p id="dashboard-properties-available" class="text-3xl font-bold text-indigo-600">0</p>
+                <div class="bg-yellow-50 p-5 rounded-xl shadow-lg flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-md font-semibold text-yellow-700">Site Visits</h3>
+                        <p id="dashboard-site-visits" class="text-4xl font-bold text-yellow-600 mt-1">0</p>
+                    </div>
+                    <p class="text-sm text-yellow-500 mt-2">-5% vs last month</p>
+                </div>
+                <div class="bg-indigo-50 p-5 rounded-xl shadow-lg flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-md font-semibold text-indigo-700">Property Listings</h3>
+                        <p id="dashboard-property-listings" class="text-4xl font-bold text-indigo-600 mt-1">0</p>
+                    </div>
+                    <p class="text-sm text-indigo-500 mt-2">+3% vs last month</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-semibold text-gray-700">Recent Leads</h3>
+                        <a href="#" class="text-sm text-blue-600 hover:underline">View all <i class="fas fa-arrow-right text-xs"></i></a>
+                    </div>
+                    <div id="dashboard-recent-leads-list" class="space-y-4 max-h-96 overflow-y-auto">
+                        <p class="text-gray-500">No recent leads to display.</p> 
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-semibold text-gray-700">Active Inquiries</h3>
+                        <a href="#" class="text-sm text-blue-600 hover:underline" onclick="navigateTo('inquiries-page'); document.querySelector('#main-nav button[data-target=inquiries-page]').click(); return false;">View all <i class="fas fa-arrow-right text-xs"></i></a>
+                    </div>
+                    <div id="dashboard-active-inquiries-list" class="space-y-4 max-h-96 overflow-y-auto">
+                        <p class="text-gray-500">No active inquiries to display.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Property Distribution</h3>
+                    <div class="flex items-center justify-center h-64 bg-white rounded-md border">
+                        <p class="text-gray-500">Property Distribution Pie Chart (Placeholder)</p>
+                        </div>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Today's Activity</h3>
+                    <div class="h-64 bg-white rounded-md border p-4 overflow-y-auto">
+                        <p class="text-gray-500">Today's Activity Log (Placeholder)</p>
+                        </div>
                 </div>
             </div>
         </div>
+
 
         <div id="leads-page" class="page bg-white p-6 rounded-lg shadow">
             <div class="flex justify-between items-center mb-4">
@@ -418,13 +475,19 @@
             </form>
         </div>
 
-    </div> <script>
+    </div> 
+    <script>
         // Simulated Data Storage
         let leads = [
-            { id: 1, source: 'Website', clientName: 'Aarav Sharma', email: 'aarav.sharma@example.com', phone: '9876543210', requirements: '3BHK Apartment, Sea View', status: 'New' },
-            { id: 2, source: 'Referral', clientName: 'Priya Patel', email: 'priya.patel@example.com', phone: '8765432109', requirements: 'Commercial Office Space, 1000 sqft', status: 'New' }
+            { id: 1, source: 'Website', clientName: 'Aarav Sharma', email: 'aarav.sharma@example.com', phone: '9876543210', requirements: '3BHK Apartment, Sea View', status: 'New', createdDate: new Date(Date.now() - 2 * 60 * 60 * 1000) }, // 2 hours ago
+            { id: 2, source: 'Referral', clientName: 'Priya Patel', email: 'priya.patel@example.com', phone: '8765432109', requirements: 'Commercial Office Space, 1000 sqft', status: 'Validated', createdDate: new Date(Date.now() - 4 * 60 * 60 * 1000) }, // 4 hours ago
+            { id: 3, source: 'Facebook', clientName: 'Rohan Mehta', email: 'rohan.mehta@example.com', phone: '7654321098', requirements: 'Plot for Villa', status: 'New', createdDate: new Date(Date.now() - 24 * 60 * 60 * 1000) }, // 1 day ago
+            { id: 4, source: 'Instagram', clientName: 'Sneha Reddy', email: 'sneha.reddy@example.com', phone: '6543210987', requirements: 'Retail Shop on High Street', status: 'Junk Lead', createdDate: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000) } // 2 days ago
         ];
-        let inquiries = [];
+        let inquiries = [
+            { id: 1, leadId: 1, clientName: 'Aarav Sharma', clientEmail: 'aarav.sharma@example.com', clientPhone: '9876543210', requirements: '3BHK Apartment, Sea View', salesExecutive: 'Alice Smith', status: 'Active', contactStatus: 'Contacted', proposalDate: '2025-05-19', proposalStatus: 'Sent', siteVisitScheduled: null, engagementStatus: 'Interested', negotiationDate: null, negotiationStatus: 'Pending', closureDate: null, closureStatus: 'Pending', followUps: [], shortlistedProperties: [], propertyType: 'Residential', lastUpdated: new Date(Date.now() - 1 * 60 * 60 * 1000) },
+            { id: 2, leadId: 2, clientName: 'Priya Patel', clientEmail: 'priya.patel@example.com', clientPhone: '8765432109', requirements: 'Commercial Office Space, 1000 sqft', salesExecutive: 'Bob Johnson', status: 'Negotiation', contactStatus: 'Contacted', proposalDate: '2025-05-18', proposalStatus: 'Accepted', siteVisitScheduled: 1, engagementStatus: 'Negotiation', negotiationDate: '2025-05-20', negotiationStatus: 'Yes', closureDate: null, closureStatus: 'Pending', followUps: [], shortlistedProperties: [], propertyType: 'Commercial', lastUpdated: new Date(Date.now() - 3 * 60 * 60 * 1000) }
+        ];
         let inventory = {
             commercial: [
                 { id: 'C1', category: 'commercial', typeDetails: 'Office Space, Grade A', address: 'Tech Park, Block A, Bangalore', pptLink: '', pptStatus: 'Pending', availability: 'Available', sellerName: 'Dev Corp', sellerContact: '9988776655' }
@@ -436,13 +499,15 @@
             land: [],
             roi: []
         };
-        let siteVisits = [];
-        let followUps = []; // { id, inquiryId, date, salesExecutive, status ('Done', 'Pending', 'Not Interested'), notes, callRecording }
+        let siteVisits = [
+            { id: 1, inquiryId: 2, salesExecutive: 'Bob Johnson', dateTime: '2025-05-19 14:00', propertyLocation: 'Commercial Office Space, 1000 sqft', status: 'Completed', execLocation: 'On-site', remarks: 'Client very interested, good discussion.'}
+        ];
+        let followUps = []; 
 
         // ID Counters
         let nextLeadId = leads.length > 0 ? Math.max(...leads.map(l => l.id)) + 1 : 1;
-        let nextInquiryId = 1;
-        let nextSiteVisitId = 1;
+        let nextInquiryId = inquiries.length > 0 ? Math.max(...inquiries.map(i => i.id)) + 1 : 1;
+        let nextSiteVisitId = siteVisits.length > 0 ? Math.max(...siteVisits.map(sv => sv.id)) + 1 : 1;
         let nextFollowUpId = 1;
         let nextPropertyId = {
             commercial: inventory.commercial.length > 0 ? parseInt(inventory.commercial[inventory.commercial.length-1].id.substring(1)) + 1 : 1,
@@ -452,26 +517,31 @@
             roi: 1
         };
         
-        const salesExecutives = ["Alice Smith", "Bob Johnson", "Carol White", "David Lee"];
+        const salesExecutives = ["Alice Smith", "Bob Johnson", "Carol White", "David Lee", "Maya Patel", "Alex Turner", "Sam Wilson"];
 
 
         // DOMContentLoaded to ensure script runs after HTML is loaded
         document.addEventListener('DOMContentLoaded', () => {
             // Initial Page Load
-            navigateTo('dashboard-page');
+            navigateTo('dashboard-page'); // Ensure dashboard is the default active page
             renderLeadsTable();
             renderInquiriesTable();
-            renderInventoryTable(); // Default to commercial
+            renderInventoryTable(); 
             renderSiteVisitsTable();
-            updateDashboardStats();
+            updateDashboardStats(); // This will now also call the new dashboard list renderers
 
             // Navigation Handling
             const navButtons = document.querySelectorAll('#main-nav button');
             navButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    navigateTo(button.dataset.target);
+                button.addEventListener('click', (e) => {
+                    const targetPageId = button.dataset.target;
+                    navigateTo(targetPageId);
                     navButtons.forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
+                    if (targetPageId === 'dashboard-page') { // Re-render dashboard lists if navigating to it
+                        renderRecentLeadsForDashboard();
+                        renderActiveInquiriesForDashboard();
+                    }
                 });
             });
 
@@ -499,8 +569,8 @@
             document.getElementById('update-site-visit-form').addEventListener('submit', handleUpdateSiteVisit);
 
 
-            // Dynamic select population for Sales Executives in Validate Lead Modal
             const assignSalesExecSelect = document.getElementById('assign-sales-executive');
+            assignSalesExecSelect.innerHTML = ''; 
             salesExecutives.forEach(exec => {
                 const option = document.createElement('option');
                 option.value = exec;
@@ -508,7 +578,6 @@
                 assignSalesExecSelect.appendChild(option);
             });
             
-            // Show/hide Sales Executive dropdown based on validation action
             document.getElementById('lead-validation-action').addEventListener('change', function() {
                 const assignDiv = document.getElementById('assign-sales-exec-div');
                 if (this.value === 'to_inquiry') {
@@ -522,7 +591,13 @@
         // Navigation Function
         function navigateTo(pageId) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            } else {
+                console.error("Page not found: ", pageId);
+                document.getElementById('dashboard-page').classList.add('active'); // Fallback to dashboard
+            }
         }
 
         // Modal Functions
@@ -533,20 +608,16 @@
 
         function closeModal(modalId) {
             document.getElementById(modalId).classList.add('hidden');
-            // If all specific modals are hidden, hide the container
             const anyModalActive = Array.from(document.querySelectorAll('.modal-content')).some(m => !m.classList.contains('hidden'));
             if (!anyModalActive) {
                  document.getElementById('modal-container').classList.remove('active');
             }
         }
-        // Close modal if backdrop is clicked
         document.getElementById('modal-container').addEventListener('click', function(event) {
-            if (event.target === this) { // Check if the click is on the backdrop itself
-                // Hide all modal content divs
+            if (event.target === this) { 
                 document.querySelectorAll('.modal-content').forEach(modalContent => {
                     modalContent.classList.add('hidden');
                 });
-                // Hide the modal container
                 this.classList.remove('active');
             }
         });
@@ -555,7 +626,7 @@
         // --- Lead Management Functions ---
         function renderLeadsTable() {
             const tbody = document.getElementById('leads-table-body');
-            tbody.innerHTML = ''; // Clear existing rows
+            tbody.innerHTML = ''; 
             leads.forEach(lead => {
                 const row = tbody.insertRow();
                 row.innerHTML = \`
@@ -570,17 +641,17 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm">
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full \${
                             lead.status === 'New' ? 'bg-blue-100 text-blue-800' :
-                            lead.status === 'Junk' ? 'bg-red-100 text-red-800' :
-                            lead.status === 'Converted to Inquiry' || lead.status === 'Converted to Inventory Listing' ? 'bg-green-100 text-green-800' : // Updated this line
+                            lead.status === 'Junk Lead' ? 'bg-red-100 text-red-800' : // Matched PDF
+                            lead.status === 'Validated' ? 'bg-green-100 text-green-800' : // Matched PDF
+                            lead.status === 'Converted to Inquiry' || lead.status === 'Converted to Inventory Listing' ? 'bg-teal-100 text-teal-800' :
                             'bg-gray-100 text-gray-800'
                         }">\${lead.status}</span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        \${lead.status === 'New' ? \`<button class="text-indigo-600 hover:text-indigo-900" onclick="openValidateLeadModal(\${lead.id})"><i class="fas fa-check-circle mr-1"></i> Validate</button>\` : ''}
-                        </td>
+                        \${(lead.status === 'New' || lead.status === 'Validated') ? \`<button class="text-indigo-600 hover:text-indigo-900" onclick="openValidateLeadModal(\${lead.id})"><i class="fas fa-check-circle mr-1"></i> Validate/Convert</button>\` : ''}
+                    </td>
                 \`;
             });
-            updateDashboardStats();
         }
 
         function handleAddLead(event) {
@@ -593,10 +664,12 @@
                 email: form.email.value,
                 phone: form.phone.value,
                 requirements: form.requirements.value,
-                status: 'New' // Initial status
+                status: 'New',
+                createdDate: new Date() // Add createdDate for sorting
             };
-            leads.push(newLead);
+            leads.unshift(newLead); // Add to the beginning for "Recent Leads"
             renderLeadsTable();
+            updateDashboardStats(); // Update dashboard after adding lead
             form.reset();
             closeModal('add-lead-modal');
         }
@@ -607,8 +680,12 @@
                 document.getElementById('validate-lead-id').value = lead.id;
                 document.getElementById('validate-lead-name').textContent = lead.clientName;
                 document.getElementById('validate-lead-requirements').textContent = lead.requirements;
-                document.getElementById('lead-validation-action').value = 'to_inquiry'; // Default action
-                document.getElementById('assign-sales-exec-div').classList.remove('hidden'); // Show by default for 'to_inquiry'
+                document.getElementById('lead-validation-action').value = 'to_inquiry'; 
+                if (document.getElementById('lead-validation-action').value === 'to_inquiry') {
+                    document.getElementById('assign-sales-exec-div').classList.remove('hidden');
+                } else {
+                    document.getElementById('assign-sales-exec-div').classList.add('hidden');
+                }
                 openModal('validate-lead-modal');
             }
         }
@@ -623,7 +700,6 @@
             if (!lead) return;
 
             if (action === 'to_inquiry') {
-                // Convert to Inquiry
                 const newInquiry = {
                     id: nextInquiryId++,
                     leadId: lead.id,
@@ -631,33 +707,39 @@
                     clientEmail: lead.email,
                     clientPhone: lead.phone,
                     requirements: lead.requirements,
-                    salesExecutive: salesExecutive,
-                    status: 'New', // Inquiry status
+                    salesExecutive: salesExecutive, 
+                    status: 'New', 
                     contactStatus: 'Pending',
                     proposalDate: null,
                     proposalStatus: 'Pending',
-                    siteVisitScheduled: null, // or an ID to site visit table
+                    siteVisitScheduled: null, 
                     engagementStatus: 'Pending',
                     negotiationDate: null,
                     negotiationStatus: 'Pending',
                     closureDate: null,
                     closureStatus: 'Pending',
-                    followUps: [], // Array to store follow-up IDs or objects
-                    shortlistedProperties: [] // Array of property IDs
+                    followUps: [], 
+                    shortlistedProperties: [],
+                    propertyType: lead.requirements.toLowerCase().includes('commercial') || lead.requirements.toLowerCase().includes('office') ? 'Commercial' : 'Residential', // Basic guess
+                    lastUpdated: new Date()
                 };
-                inquiries.push(newInquiry);
-                lead.status = 'Converted to Inquiry'; // Corrected status
+                inquiries.unshift(newInquiry); // Add to beginning
+                lead.status = 'Converted to Inquiry'; 
                 renderInquiriesTable();
             } else if (action === 'to_inventory') {
-                // Convert to Inventory (client is selling)
-                lead.status = 'Converted to Inventory Listing'; // Corrected status
+                lead.status = 'Converted to Inventory Listing'; 
                 alert(\`Lead "\${lead.clientName}" marked for Inventory Listing. Please add property details in the Inventory section.\`);
-
             } else if (action === 'junk') {
                 lead.status = 'Junk Lead';
             }
+            // Update lead status for "Recent Leads" if it was validated to something other than conversion
+            if (lead.status !== 'Converted to Inquiry' && lead.status !== 'Converted to Inventory Listing' && lead.status !== 'Junk Lead' && action !== 'to_inquiry' && action !== 'to_inventory') {
+                 lead.status = 'Validated'; // As per PDF for non-converted leads
+            }
+
 
             renderLeadsTable();
+            updateDashboardStats(); // Update dashboard after validation
             closeModal('validate-lead-modal');
         }
 
@@ -674,9 +756,13 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm">
                          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full \${
                             inquiry.status === 'New' ? 'bg-blue-100 text-blue-800' :
+                            inquiry.status === 'Active' ? 'bg-cyan-100 text-cyan-800' : 
+                            inquiry.status === 'Proposal' ? 'bg-purple-100 text-purple-800' : // From PDF
+                            inquiry.status === 'Site Visit' ? 'bg-yellow-100 text-yellow-800' : // From PDF
                             inquiry.status === 'Lost Lead' ? 'bg-red-100 text-red-800' :
                             inquiry.status === 'Sold' || inquiry.status === 'Rented' ? 'bg-green-100 text-green-800' :
-                            inquiry.status === 'Negotiation' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800'
+                            inquiry.status === 'Negotiation' ? 'bg-orange-100 text-orange-800' : // From PDF
+                            'bg-gray-100 text-gray-800'
                          }">\${inquiry.status}</span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">\${inquiry.contactStatus}</td>
@@ -685,10 +771,9 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
                         <button class="text-blue-600 hover:text-blue-900" onclick="openUpdateInquiryModal(\${inquiry.id})"><i class="fas fa-edit mr-1"></i> Update</button>
                         <button class="text-green-600 hover:text-green-900" onclick="openScheduleSiteVisitModal(\${inquiry.id})"><i class="fas fa-calendar-alt mr-1"></i> Site Visit</button>
-                        </td>
+                    </td>
                 \`;
             });
-            updateDashboardStats();
         }
 
         function openUpdateInquiryModal(inquiryId) {
@@ -716,28 +801,37 @@
                 inquiry.proposalDate = document.getElementById('inquiry-proposal-date').value;
                 inquiry.proposalStatus = document.getElementById('inquiry-proposal-status').value;
                 inquiry.engagementStatus = document.getElementById('inquiry-engagement-status').value;
+                inquiry.lastUpdated = new Date();
                 
                 if (inquiry.engagementStatus === 'Lost Lead') inquiry.status = 'Lost Lead';
                 else if (inquiry.engagementStatus === 'Sold') inquiry.status = 'Sold';
                 else if (inquiry.engagementStatus === 'Rented') inquiry.status = 'Rented';
                 else if (inquiry.engagementStatus === 'Negotiation') inquiry.status = 'Negotiation';
-                else if (inquiry.engagementStatus === 'Interested' && inquiry.status === 'New') inquiry.status = 'Active'; // Example of further status update
+                else if (inquiry.proposalStatus === 'Sent' || inquiry.proposalStatus === 'Accepted') inquiry.status = 'Proposal';
+                else if (inquiry.siteVisitScheduled && siteVisits.find(sv => sv.id === inquiry.siteVisitScheduled && sv.status !== 'Cancelled')) inquiry.status = 'Site Visit';
+                else if (inquiry.engagementStatus === 'Interested' && (inquiry.status === 'New' || inquiry.status === 'Active')) {
+                     inquiry.status = 'Active'; 
+                } else if (inquiry.status === 'New' && inquiry.contactStatus !== 'Pending' && inquiry.contactStatus !== 'Not Contacted') {
+                    inquiry.status = 'Active';
+                }
+
 
                 if (inquiry.status === 'Sold' || inquiry.status === 'Rented') {
                     alert(\`Inquiry INQ-\${inquiry.id} marked as \${inquiry.status}. Remember to update the property status in Inventory.\`);
                 }
 
                 renderInquiriesTable();
+                updateDashboardStats(); // Update dashboard after inquiry update
                 closeModal('update-inquiry-modal');
             }
         }
 
 
         // --- Inventory Management Functions ---
-        let currentInventoryCategory = 'commercial'; // Default category
+        let currentInventoryCategory = 'commercial'; 
 
         function renderInventoryTable(category = currentInventoryCategory) {
-            currentInventoryCategory = category; // Ensure current category is updated
+            currentInventoryCategory = category; 
             const tbody = document.getElementById('inventory-table-body');
             tbody.innerHTML = '';
             const categoryInventory = inventory[category] || [];
@@ -756,7 +850,7 @@
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full \${
                             item.availability === 'Available' ? 'bg-green-100 text-green-800' :
                             item.availability === 'Sold' || item.availability === 'Rented' ? 'bg-red-100 text-red-800' : 
-                            item.availability === 'Not Available' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800' // Added Not Available
+                            item.availability === 'Not Available' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800'
                         }">\${item.availability}</span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -764,7 +858,6 @@
                     </td>
                 \`;
             });
-            updateDashboardStats();
         }
 
         function handleAddProperty(event) {
@@ -782,9 +875,10 @@
                 pptStatus: 'Pending',
                 availability: 'Available'
             };
-            if (!inventory[category]) inventory[category] = []; // Ensure category array exists
+            if (!inventory[category]) inventory[category] = []; 
             inventory[category].push(newProperty);
             renderInventoryTable(category); 
+            updateDashboardStats(); // Update dashboard after adding property
             form.reset();
             closeModal('add-property-modal');
         }
@@ -813,6 +907,7 @@
                 item.pptStatus = document.getElementById('inventory-ppt-status').value;
                 item.availability = document.getElementById('inventory-availability-status').value;
                 renderInventoryTable(category);
+                updateDashboardStats(); // Update dashboard after inventory update
                 closeModal('manage-inventory-modal');
             }
         }
@@ -887,9 +982,12 @@
                 };
                 siteVisits.push(newSiteVisit);
                 inquiry.siteVisitScheduled = newSiteVisit.id; 
+                inquiry.status = 'Site Visit'; // Update inquiry status
+                inquiry.lastUpdated = new Date();
 
                 renderSiteVisitsTable();
                 renderInquiriesTable(); 
+                updateDashboardStats(); // Update dashboard after scheduling visit
                 closeModal('schedule-site-visit-modal');
                 document.getElementById('schedule-site-visit-form').reset();
             }
@@ -918,10 +1016,14 @@
                 visit.status = document.getElementById('update-site-visit-status').value;
                 visit.execLocation = document.getElementById('update-site-visit-exec-location').value;
                 visit.remarks = document.getElementById('update-site-visit-remarks').value;
+                
+                const inquiry = inquiries.find(i => i.id === visit.inquiryId);
+                if(inquiry) inquiry.lastUpdated = new Date();
+
 
                 if (visit.status === 'Completed') {
-                    const inquiry = inquiries.find(i => i.id === visit.inquiryId);
                     if (inquiry) {
+                        inquiry.status = 'Active'; // Or some other appropriate status post-visit
                         const newFollowUp = {
                             id: nextFollowUpId++,
                             inquiryId: inquiry.id,
@@ -932,29 +1034,160 @@
                             callRecording: ''
                         };
                         followUps.push(newFollowUp);
-                        if (!inquiry.followUps) inquiry.followUps = []; // Ensure followUps array exists
+                        if (!inquiry.followUps) inquiry.followUps = []; 
                         inquiry.followUps.push(newFollowUp.id); 
                         alert(\`Follow-up created for Inquiry INQ-\${inquiry.id}.\`);
                     }
                 }
                 renderSiteVisitsTable();
+                if(inquiry) renderInquiriesTable();
+                updateDashboardStats(); // Update dashboard after site visit update
                 closeModal('update-site-visit-modal');
             }
         }
 
-        // --- Dashboard Update ---
+        // --- Dashboard Update Functions ---
+        function formatTimeAgo(date) {
+            const now = new Date();
+            const seconds = Math.round((now - date) / 1000);
+            const minutes = Math.round(seconds / 60);
+            const hours = Math.round(minutes / 60);
+            const days = Math.round(hours / 24);
+
+            if (seconds < 60) return \`\${seconds} seconds ago\`;
+            if (minutes < 60) return \`\${minutes} minutes ago\`;
+            if (hours < 24) return \`\${hours} hours ago\`;
+            return \`\${days} days ago\`;
+        }
+
+        function getInitials(name) {
+            if (!name) return '';
+            const parts = name.split(' ');
+            if (parts.length > 1) {
+                return parts[0][0].toUpperCase() + parts[parts.length - 1][0].toUpperCase();
+            }
+            return name[0].toUpperCase();
+        }
+        
+        function getSourceIcon(source) {
+            switch (source.toLowerCase()) {
+                case 'facebook': return '<i class="fab fa-facebook-f text-blue-600"></i>';
+                case 'instagram': return '<i class="fab fa-instagram text-pink-500"></i>';
+                case 'website': return '<i class="fas fa-globe text-green-500"></i>';
+                case 'referral': return '<i class="fas fa-user-friends text-purple-500"></i>';
+                case 'walk-in': return '<i class="fas fa-walking text-teal-500"></i>';
+                case 'sales team': return '<i class="fas fa-headset text-orange-500"></i>';
+                default: return '<i class="fas fa-question-circle text-gray-400"></i>';
+            }
+        }
+
+
+        function renderRecentLeadsForDashboard() {
+            const container = document.getElementById('dashboard-recent-leads-list');
+            container.innerHTML = ''; // Clear previous items
+            const recentLeads = [...leads].sort((a, b) => b.createdDate - a.createdDate).slice(0, 5); // Get latest 5
+
+            if (recentLeads.length === 0) {
+                container.innerHTML = '<p class="text-gray-500">No recent leads to display.</p>';
+                return;
+            }
+
+            recentLeads.forEach(lead => {
+                const leadElement = document.createElement('div');
+                leadElement.className = 'bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow duration-200';
+                leadElement.innerHTML = \`
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-semibold mr-3">
+                                \${getInitials(lead.clientName)}
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-800">\${lead.clientName}</p>
+                                <p class="text-xs text-gray-500">\${lead.phone}</p>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 text-xs leading-tight font-semibold rounded-full \${
+                            lead.status === 'New' ? 'bg-blue-100 text-blue-700' :
+                            lead.status === 'Validated' ? 'bg-green-100 text-green-700' :
+                            lead.status === 'Junk Lead' ? 'bg-red-100 text-red-700' : 'bg-gray-100 text-gray-700'
+                        }">\${lead.status}</span>
+                    </div>
+                    <div class="flex justify-between items-center mt-3 text-xs text-gray-500">
+                        <span>\${getSourceIcon(lead.source)} \${lead.source}</span>
+                        <span>\${formatTimeAgo(lead.createdDate)}</span>
+                    </div>
+                \`;
+                container.appendChild(leadElement);
+            });
+        }
+
+        function renderActiveInquiriesForDashboard() {
+            const container = document.getElementById('dashboard-active-inquiries-list');
+            container.innerHTML = '';
+            const activeInquiriesList = inquiries.filter(inq => !['Lost Lead', 'Sold', 'Rented'].includes(inq.status))
+                                          .sort((a,b) => b.lastUpdated - a.lastUpdated) // Sort by most recently updated
+                                          .slice(0, 5); // Show top 5
+
+            if (activeInquiriesList.length === 0) {
+                container.innerHTML = '<p class="text-gray-500">No active inquiries to display.</p>';
+                return;
+            }
+            
+            activeInquiriesList.forEach(inquiry => {
+                const inquiryElement = document.createElement('div');
+                inquiryElement.className = 'bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow duration-200';
+                // Determine current stage for display based on inquiry.status
+                let stageDisplay = inquiry.status;
+                if (inquiry.status === 'Active' && inquiry.proposalStatus !== 'Pending') stageDisplay = 'Proposal';
+                else if (inquiry.status === 'Active' && inquiry.siteVisitScheduled) stageDisplay = 'Site Visit';
+
+
+                inquiryElement.innerHTML = \`
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="font-semibold text-gray-800">\${inquiry.clientName} 
+                                <span class="ml-2 px-2 py-0.5 text-xs font-medium rounded-full \${
+                                    stageDisplay === 'Proposal' ? 'bg-purple-100 text-purple-700' :
+                                    stageDisplay === 'Site Visit' ? 'bg-yellow-100 text-yellow-700' :
+                                    stageDisplay === 'Negotiation' ? 'bg-orange-100 text-orange-700' :
+                                    'bg-blue-100 text-blue-700' 
+                                }">\${stageDisplay}</span>
+                            </h4>
+                            <p class="text-sm text-gray-600">Property: \${inquiry.propertyType}</p>
+                            <p class="text-xs text-gray-500 truncate max-w-xs" title="\${inquiry.requirements}">Req: \${inquiry.requirements}</p>
+                        </div>
+                        <button class="text-gray-400 hover:text-gray-600 text-xs"> <i class="fas fa-ellipsis-v"></i> </button>
+                    </div>
+                    <div class="mt-3 pt-3 border-t border-gray-200 flex justify-between items-center text-xs text-gray-500">
+                        <span class="flex items-center">
+                            <span class="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-semibold text-xs mr-2">\${getInitials(inquiry.salesExecutive)}</span>
+                            Assigned to \${inquiry.salesExecutive.split(' ')[0]}
+                        </span>
+                        <span>Last updated: \${formatTimeAgo(inquiry.lastUpdated)}</span>
+                    </div>
+                \`;
+                container.appendChild(inquiryElement);
+            });
+        }
+
+
         function updateDashboardStats() {
             document.getElementById('dashboard-total-leads').textContent = leads.length;
-            const activeInquiries = inquiries.filter(i => i.status !== 'Lost Lead' && i.status !== 'Sold' && i.status !== 'Rented').length;
-            document.getElementById('dashboard-active-inquiries').textContent = activeInquiries;
+            const activeInquiriesCount = inquiries.filter(i => i.status !== 'Lost Lead' && i.status !== 'Sold' && i.status !== 'Rented').length;
+            document.getElementById('dashboard-active-inquiries').textContent = activeInquiriesCount;
+            document.getElementById('dashboard-site-visits').textContent = siteVisits.length; // Simple count for now
             
-            let availableProperties = 0;
-            for (const categoryKey in inventory) { // Use categoryKey to avoid conflict with 'category' variable in other scopes
-                if (Array.isArray(inventory[categoryKey])) { // Ensure it's an array
-                    availableProperties += inventory[categoryKey].filter(p => p.availability === 'Available').length;
+            let totalProperties = 0;
+            for (const categoryKey in inventory) { 
+                if (Array.isArray(inventory[categoryKey])) { 
+                    totalProperties += inventory[categoryKey].length;
                 }
             }
-            document.getElementById('dashboard-properties-available').textContent = availableProperties;
+            document.getElementById('dashboard-property-listings').textContent = totalProperties;
+
+            // Render the lists on the dashboard
+            renderRecentLeadsForDashboard();
+            renderActiveInquiriesForDashboard();
         }
 
     </script>
